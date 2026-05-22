@@ -1,0 +1,14 @@
+C:\Users\Nokuphila.Shengwe\source\repos\Polymorphism\bin\Debug\net10.0\Polymorphism.exe
+C:\Users\Nokuphila.Shengwe\source\repos\Polymorphism\bin\Debug\net10.0\Polymorphism.deps.json
+C:\Users\Nokuphila.Shengwe\source\repos\Polymorphism\bin\Debug\net10.0\Polymorphism.runtimeconfig.json
+C:\Users\Nokuphila.Shengwe\source\repos\Polymorphism\bin\Debug\net10.0\Polymorphism.dll
+C:\Users\Nokuphila.Shengwe\source\repos\Polymorphism\bin\Debug\net10.0\Polymorphism.pdb
+C:\Users\Nokuphila.Shengwe\source\repos\Polymorphism\obj\Debug\net10.0\Polymorphism.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Nokuphila.Shengwe\source\repos\Polymorphism\obj\Debug\net10.0\Polymorphism.AssemblyInfoInputs.cache
+C:\Users\Nokuphila.Shengwe\source\repos\Polymorphism\obj\Debug\net10.0\Polymorphism.AssemblyInfo.cs
+C:\Users\Nokuphila.Shengwe\source\repos\Polymorphism\obj\Debug\net10.0\Polymorphism.csproj.CoreCompileInputs.cache
+C:\Users\Nokuphila.Shengwe\source\repos\Polymorphism\obj\Debug\net10.0\Polymorphism.dll
+C:\Users\Nokuphila.Shengwe\source\repos\Polymorphism\obj\Debug\net10.0\refint\Polymorphism.dll
+C:\Users\Nokuphila.Shengwe\source\repos\Polymorphism\obj\Debug\net10.0\Polymorphism.pdb
+C:\Users\Nokuphila.Shengwe\source\repos\Polymorphism\obj\Debug\net10.0\Polymorphism.genruntimeconfig.cache
+C:\Users\Nokuphila.Shengwe\source\repos\Polymorphism\obj\Debug\net10.0\ref\Polymorphism.dll

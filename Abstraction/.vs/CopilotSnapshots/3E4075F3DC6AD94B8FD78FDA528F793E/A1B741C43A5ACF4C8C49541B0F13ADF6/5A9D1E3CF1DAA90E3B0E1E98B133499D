@@ -1,0 +1,77 @@
+﻿using System;
+
+// Namespace groups related classes together
+namespace INotificationService
+{
+    // Interface defining a contract for sending notifications
+    interface INotificationService
+    {
+        // Method that must be implemented by any class using this interface
+        void SendNotification(string recipient, string message);
+    }
+
+    // Email notification implementation of the interface
+    public class EmailNotificationService : INotificationService
+    {
+        public void SendNotification(string recipient, string message)
+        {
+            // Displays email notification message
+            Console.WriteLine($"Email sent to {recipient}: {message}");
+        }
+    }
+
+    // SMS notification implementation of the interface
+    public class SmsNotificationService : INotificationService
+    {
+        public void SendNotification(string recipient, string message)
+        {
+            // Displays SMS notification message
+            Console.WriteLine($"SMS sent to {recipient}: {message}");
+        }
+    }
+
+    // Service that processes orders and sends notifications
+    public class OrderService
+    {
+        // Private field to store the notification service
+        private readonly INotificationService _notificationService;
+
+        // Constructor using dependency injection
+        public OrderService(INotificationService notificationService)
+        {
+            // Assigning the passed notification service to the field
+            _notificationService = notificationService;
+        }
+
+        // Method to place an order
+        public void PlaceOrder(string recipient, string message)
+        {
+            // Simulate order processing
+            Console.WriteLine("Order placed successfully.");
+
+            // Send notification after order is placed
+            _notificationService.SendNotification(recipient, message);
+        }
+    }
+
+    // Entry point of the application
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Create instances of notification services
+            INotificationService emailService = new EmailNotificationService();
+            INotificationService smsService = new SmsNotificationService();
+
+            // Send test notifications directly
+            emailService.SendNotification("user@example.com", "Hello via Email!");
+            smsService.SendNotification("1234567890", "Hello via SMS!");
+
+            // Create OrderService using EmailNotification
+            OrderService orderService = new OrderService(emailService);
+
+            // Place an order and send notification
+            orderService.PlaceOrder("user@example.com", "Your order has been placed!");
+        }
+    }
+}

@@ -1,0 +1,71 @@
+﻿using System;
+using System.Collections.Generic;
+
+// Base vehicle class
+public class Vehicle
+{
+    public string Make { get; set; }
+    public string Model { get; set; }
+    public int Year { get; set; }
+
+    // Removing 'virtual' will make overrides in derived types not used when called
+    // through a Vehicle reference. We'll edit this in step-3 to demonstrate the change.
+    public string GetDescription()
+    {
+        return $"{Year} {Make} {Model}";
+    }
+}
+
+// Car extends Vehicle with DoorCount
+public class Car : Vehicle
+{
+    public int DoorCount { get; set; }
+
+    public override string GetDescription()
+    {
+        return $"{base.GetDescription()} - Car with {DoorCount} doors";
+    }
+}
+
+// Truck extends Vehicle with PayloadTons
+public class Truck : Vehicle
+{
+    public double PayloadTons { get; set; }
+
+    public override string GetDescription()
+    {
+        return $"{base.GetDescription()} - Truck with payload {PayloadTons} tons";
+    }
+}
+
+// Sealed ElectricCar inherits from Car and adds BatteryRangeKm
+// Sealed to prevent further inheritance — in a real project you might seal a class
+// when it's complete/stable or to preserve invariants and allow compiler/runtime optimizations.
+public sealed class ElectricCar : Car
+{
+    public int BatteryRangeKm { get; set; }
+
+    public override string GetDescription()
+    {
+        return $"{base.GetDescription()} - Electric range {BatteryRangeKm} km";
+    }
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        var fleet = new List<Vehicle>
+        {
+            new Car { Make = "Toyota", Model = "Corolla", Year = 2020, DoorCount = 4 },
+            new Truck { Make = "Ford", Model = "F-150", Year = 2018, PayloadTons = 1.5 },
+            new ElectricCar { Make = "Tesla", Model = "Model 3", Year = 2022, DoorCount = 4, BatteryRangeKm = 500 }
+        };
+
+        Console.WriteLine("Fleet descriptions (after removing virtual):");
+        foreach (var v in fleet)
+        {
+            Console.WriteLine(v.GetDescription());
+        }
+    }
+}

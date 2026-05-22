@@ -1,0 +1,103 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Polymorphism
+{
+    abstract class Shape
+    {
+        public abstract double Area();
+        public abstract double Perimeter();
+
+        public virtual string Describe()
+        {
+            return $"{GetType().Name}: Area={Area():F2}, Perimeter={Perimeter():F2}";
+        }
+    }
+
+    class Circle : Shape
+    {
+        public double Radius { get; }
+        public Circle(double radius) => Radius = radius;
+        public override double Area() => Math.PI * Radius * Radius;
+        public override double Perimeter() => 2 * Math.PI * Radius;
+    }
+
+    class Rectangle : Shape
+    {
+        public double Width { get; }
+        public double Height { get; }
+        public Rectangle(double width, double height)
+        {
+            Width = width;
+            Height = height;
+        }
+        public override double Area() => Width * Height;
+        public override double Perimeter() => 2 * (Width + Height);
+    }
+
+    class Triangle : Shape
+    {
+        // We accept baseLength and height; perimeter is computed assuming a right triangle
+        public double BaseLength { get; }
+        public double Height { get; }
+        public Triangle(double baseLength, double height)
+        {
+            BaseLength = baseLength;
+            Height = height;
+        }
+        public override double Area() => 0.5 * BaseLength * Height;
+        public override double Perimeter()
+        {
+            // assume right triangle with legs = base and height
+            var hypotenuse = Math.Sqrt(BaseLength * BaseLength + Height * Height);
+            return BaseLength + Height + hypotenuse;
+        }
+    }
+
+    class Program
+    {
+        static void PrintReport(List<Shape> shapes)
+        {
+            Console.WriteLine("Shape report\n--------------");
+
+            foreach (var s in shapes)
+            {
+                // Describe calls the virtual method implemented in the concrete type
+                Console.WriteLine(s.Describe());
+            }
+
+            // Use LINQ to find the shape with the largest area
+            // This orders shapes by Area() descending and takes the first one
+            var largest = shapes.OrderByDescending(s => s.Area()).FirstOrDefault();
+
+            if (largest != null)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Largest by area:");
+                Console.WriteLine(largest.Describe());
+            }
+        }
+
+        static void Main()
+        {
+            var shapes = new List<Shape>
+            {
+                new Circle(3),
+                new Rectangle(4, 5),
+                new Triangle(3, 4),
+                new Circle(5.5)
+            };
+
+            PrintReport(shapes);
+
+            Console.WriteLine();
+            Console.WriteLine("Demo notes:");
+            Console.WriteLine("- When Area() is called on a Shape reference, the runtime performs virtual dispatch and executes the concrete implementation (Circle/Rectangle/Triangle) based on the object's actual type.");
+            Console.WriteLine("- The LINQ query used to find the largest shape is: shapes.OrderByDescending(s => s.Area()).FirstOrDefault();");
+            Console.WriteLine("  * shapes: the collection to query");
+            Console.WriteLine("  * OrderByDescending(s => s.Area()): sorts elements so the largest Area is first (Area() is evaluated for each element)");
+            Console.WriteLine("  * FirstOrDefault(): picks the first element from the sorted sequence, or null if empty");
+        }
+    }
+}
